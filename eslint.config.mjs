@@ -13,6 +13,7 @@ export default [
   js.configs.recommended,
   {
     rules: {
+      "no-extra-boolean-cast": 0,
       "no-unused-vars": 0,
       "react/display-name": 0,
       "react/jsx-key": 0,

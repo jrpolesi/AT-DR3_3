@@ -1,10 +1,10 @@
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
-import { FilterAndSort } from "../components/FilterAndSort";
-import { IssueItem } from "../components/IssueItem";
-import { ListWithRefresh } from "../components/ListWithRefresh";
-import { ProgressBar } from "../components/ProgressBar";
-import { useFilterAndSortIssues } from "../hooks/useFilterAndSortIssues";
-import { useIssues } from "../hooks/useIssues";
+import { FilterAndSort } from "../components/FilterAndSort.jsx";
+import { IssueItem } from "../components/IssueItem.jsx";
+import { ListWithRefresh } from "../components/ListWithRefresh.jsx";
+import { ProgressBar } from "../components/ProgressBar.jsx";
+import { useFilterAndSortIssues } from "../hooks/useFilterAndSortIssues.jsx";
+import { useIssues } from "../hooks/useIssues.jsx";
 
 export function IssuesScreen() {
   const { sort, filter, filterOptions, setFilter, setSort, sortOptions } =

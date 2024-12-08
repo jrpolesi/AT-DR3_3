@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
-import { LoginForm } from "../components/LoginForm";
-import { useAuthContext } from "../context/Auth";
+import { LoginForm } from "../components/LoginForm.jsx";
+import { useAuthContext } from "../context/Auth.jsx";
 
 export function AuthScreen() {
   const { login } = useAuthContext();

@@ -1,5 +1,5 @@
-import { useAPIContext } from "../context/API";
-import { useQuery } from "./useQuery";
+import { useAPIContext } from "../context/API.jsx";
+import { useQuery } from "./useQuery.jsx";
 
 export function useUser() {
   const api = useAPIContext();

@@ -1,10 +1,10 @@
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
-import { FilterAndSort } from "../components/FilterAndSort";
-import { ListWithRefresh } from "../components/ListWithRefresh";
-import { ProgressBar } from "../components/ProgressBar";
-import { RepositoryItem } from "../components/RepositoryItem";
-import { useFilterAndSortRepositories } from "../hooks/useFilterAndSortRepositories";
-import { useRepositories } from "../hooks/useRepositories";
+import { FilterAndSort } from "../components/FilterAndSort.jsx";
+import { ListWithRefresh } from "../components/ListWithRefresh.jsx";
+import { ProgressBar } from "../components/ProgressBar.jsx";
+import { RepositoryItem } from "../components/RepositoryItem.jsx";
+import { useFilterAndSortRepositories } from "../hooks/useFilterAndSortRepositories.jsx";
+import { useRepositories } from "../hooks/useRepositories.jsx";
 
 export function RepositoriesScreen() {
   const { sort, filter, filterOptions, setFilter, setSort, sortOptions } =

@@ -1,7 +1,7 @@
 import React from "react";
 import { Image, Linking, StyleSheet, Text, View } from "react-native";
-import { useLayoutOrientation } from "../hooks/useLayoutOrientation";
-import { SystemButton } from "./SystemButton";
+import { useLayoutOrientation } from "../hooks/useLayoutOrientation.jsx";
+import { SystemButton } from "./SystemButton.jsx";
 
 export function GitHubUser({
   avatarUrl,

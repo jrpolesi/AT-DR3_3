@@ -1,6 +1,6 @@
-import { issues } from "./get/issues";
-import { repositories } from "./get/repositories";
-import { user } from "./get/user";
+import { issues } from "./get/issues.js";
+import { repositories } from "./get/repositories.js";
+import { user } from "./get/user.js";
 
 export class API {
   baseURL = "https://api.github.com";

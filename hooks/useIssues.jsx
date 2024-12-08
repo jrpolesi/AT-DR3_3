@@ -1,5 +1,5 @@
-import { useAPIContext } from "../context/API";
-import { useInfinityQuery } from "./useInfinityQuery";
+import { useAPIContext } from "../context/API.jsx";
+import { useInfinityQuery } from "./useInfinityQuery.jsx";
 
 export function useIssues(options) {
   const api = useAPIContext();

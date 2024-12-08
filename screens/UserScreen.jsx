@@ -1,6 +1,6 @@
 import { ActivityIndicator, StyleSheet, View } from "react-native";
-import { GitHubUser } from "../components/GitHubUser";
-import { useUser } from "../hooks/useUser";
+import { GitHubUser } from "../components/GitHubUser.jsx";
+import { useUser } from "../hooks/useUser.jsx";
 
 export function UserScreen() {
   const { data, isLoading } = useUser();

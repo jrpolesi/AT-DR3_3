@@ -1,7 +1,7 @@
 import React from "react";
 import { Linking, StyleSheet, Text, View } from "react-native";
-import { useLayoutOrientation } from "../hooks/useLayoutOrientation";
-import { SystemButton } from "./SystemButton";
+import { useLayoutOrientation } from "../hooks/useLayoutOrientation.jsx";
+import { SystemButton } from "./SystemButton.jsx";
 
 export function IssueItem({ title, state, issueNumber, url, comments }) {
   const { isPortrait } = useLayoutOrientation();

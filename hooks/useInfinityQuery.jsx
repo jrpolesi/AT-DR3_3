@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useToastErrorContext } from "../context/ToastError";
+import { useToastErrorContext } from "../context/ToastError.jsx";
 
 export function useInfinityQuery(queryFn, options, onError) {
   const { setToastError } = useToastErrorContext();

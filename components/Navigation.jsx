@@ -1,11 +1,11 @@
 import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
-import { useAuthContext } from "../context/Auth";
-import { AuthScreen } from "../screens/AuthScreen";
-import { IssuesScreen } from "../screens/IssuesScreen";
-import { RepositoriesScreen } from "../screens/RepositoriesScreen";
-import { UserScreen } from "../screens/UserScreen";
+import { useAuthContext } from "../context/Auth.jsx";
+import { AuthScreen } from "../screens/AuthScreen.jsx";
+import { IssuesScreen } from "../screens/IssuesScreen.jsx";
+import { RepositoriesScreen } from "../screens/RepositoriesScreen.jsx";
+import { UserScreen } from "../screens/UserScreen.jsx";
 
 const bottomTabNavigator = createBottomTabNavigator();
 export function Navigation() {

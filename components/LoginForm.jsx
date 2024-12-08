@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
-import { FormField } from "./FormField";
-import { SystemButton } from "./SystemButton";
+import { FormField } from "./FormField.jsx";
+import { SystemButton } from "./SystemButton.jsx";
 
 export function LoginForm({ onSubmit }) {
   const [token, setToken] = useState("");
