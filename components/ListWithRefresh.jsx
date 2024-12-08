@@ -1,18 +1,18 @@
 import { ActivityIndicator, FlatList, StyleSheet } from "react-native";
-import { RepositoryItem } from "./RepositoryItem";
 
-export function RepositoriesList({
+export function ListWithRefresh({
   data,
   isLoading,
   isRefreshing,
   fetchNextPage,
   resetPagination,
   hasNextPage,
+  ...props
 }) {
   return (
     <FlatList
+      {...props}
       data={data}
-      renderItem={({ item }) => <RepositoryItem {...item} />}
       keyExtractor={(item) => item.id}
       ListFooterComponent={isLoading && ActivityIndicator}
       refreshing={!!isRefreshing}

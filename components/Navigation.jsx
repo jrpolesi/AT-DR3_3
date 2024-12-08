@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { useAuthContext } from "../context/Auth";
 import { AuthScreen } from "../screens/AuthScreen";
+import { IssuesScreen } from "../screens/IssuesScreen";
 import { RepositoriesScreen } from "../screens/RepositoriesScreen";
 import { UserScreen } from "../screens/UserScreen";
 
@@ -33,6 +34,16 @@ export function Navigation() {
                 title: "Repos",
                 tabBarIcon: ({ color, size }) => (
                   <Ionicons name="list" color={color} size={size} />
+                ),
+              }}
+            />
+            <bottomTabNavigator.Screen
+              name="Issues"
+              component={IssuesScreen}
+              options={{
+                title: "Issues",
+                tabBarIcon: ({ color, size }) => (
+                  <Ionicons name="warning" color={color} size={size} />
                 ),
               }}
             />

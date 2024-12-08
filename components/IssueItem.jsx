@@ -3,18 +3,19 @@ import { Linking, StyleSheet, Text, View } from "react-native";
 import { useLayoutOrientation } from "../hooks/useLayoutOrientation";
 import { SystemButton } from "./SystemButton";
 
-export function RepositoryItem({ name, description, stars, url }) {
+export function IssueItem({ title, state, issueNumber, url, comments }) {
   const { isPortrait } = useLayoutOrientation();
 
   return (
     <View style={styles.container(isPortrait)}>
       <View style={styles.main}>
-        <View style={styles.header(isPortrait)}>
-          <Text style={styles.title(isPortrait)}>{name}</Text>
-          <Text style={styles.stars}>Stars: {stars}</Text>
-        </View>
+        <Text style={styles.header}>
+          <Text style={styles.title}>{title}</Text>{" "}
+          <Text style={styles.issueNumber}>#{issueNumber}</Text>
+        </Text>
 
-        <Text style={styles.description}>{description}</Text>
+        <Text style={styles.comments}>{comments} comentários</Text>
+        <Text style={styles.state(state === "open")}>{state}</Text>
       </View>
 
       <SystemButton onPress={() => Linking.openURL(url)}>
@@ -39,22 +40,32 @@ const styles = StyleSheet.create({
     gap: 6,
     flex: 1,
   },
-  header: (isPortrait) => ({
-    flexDirection: isPortrait ? "column" : "row",
-    alignItems: "flex-start",
-    gap: isPortrait ? 6 : 12,
-  }),
-  title: (isPortrait) => ({
+  header: {
+    alignItems: "flex-end",
+    gap: 4,
+  },
+  title: {
     fontSize: 18,
     fontWeight: "bold",
-    flex: isPortrait ? 0 : 1,
-  }),
-  description: {
-    fontSize: 14,
-    color: "#666",
-    flex: 1,
   },
-  stars: {
+  issueNumber: {
+    fontSize: 16,
+    color: "#0d3d86",
+    fontWeight: "bold",
+  },
+  state: (isOpen) => ({
+    fontSize: 14,
+    backgroundColor: isOpen ? "#28a745" : "#cb2431",
+    color: "white",
+    alignSelf: "flex-start",
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+    borderRadius: 4,
+    overflow: "hidden",
+    flex: 1,
+    textTransform: "capitalize",
+  }),
+  comments: {
     fontSize: 14,
     color: "#333",
   },

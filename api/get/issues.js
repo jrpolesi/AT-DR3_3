@@ -4,6 +4,7 @@ export async function issues(options = {}) {
   const urlParams = new URLSearchParams({
     ...options,
     page: options.page || 1,
+    state: options.state ?? "all",
   });
 
   const url = `${baseURL}/issues?${urlParams}`;

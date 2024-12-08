@@ -1,10 +1,19 @@
-import { ActivityIndicator, StyleSheet, View } from "react-native";
-import { RepositoriesList } from "../components/RepositoriesList";
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import { FilterAndSort } from "../components/FilterAndSort";
+import { ListWithRefresh } from "../components/ListWithRefresh";
+import { ProgressBar } from "../components/ProgressBar";
+import { RepositoryItem } from "../components/RepositoryItem";
+import { useFilterAndSortRepositories } from "../hooks/useFilterAndSortRepositories";
 import { useRepositories } from "../hooks/useRepositories";
 
 export function RepositoriesScreen() {
-  const { data, isLoading, error, isRefreshing, pagination } =
-    useRepositories();
+  const { sort, filter, filterOptions, setFilter, setSort, sortOptions } =
+    useFilterAndSortRepositories();
+
+  const { data, isLoading, error, isRefreshing, pagination } = useRepositories({
+    sort,
+    visibility: filter,
+  });
 
   if (error) {
     return null;
@@ -16,14 +25,34 @@ export function RepositoriesScreen() {
 
   return (
     <View style={styles.container}>
-      <RepositoriesList
-        data={data}
-        isLoading={isLoading}
-        isRefreshing={isRefreshing}
-        fetchNextPage={pagination.fetchNextPage}
-        resetPagination={pagination.resetPagination}
-        hasNextPage={pagination.hasNextPage}
+      <FilterAndSort
+        filterOptions={filterOptions}
+        filter={filter}
+        onChangeFilter={setFilter}
+        sortOptions={sortOptions}
+        sort={sort}
+        onChangeSort={setSort}
       />
+      {!!data?.length ? (
+        <ListWithRefresh
+          data={data}
+          isLoading={isLoading}
+          isRefreshing={isRefreshing}
+          fetchNextPage={pagination.fetchNextPage}
+          resetPagination={pagination.resetPagination}
+          hasNextPage={pagination.hasNextPage}
+          renderItem={({ item }) => <RepositoryItem {...item} />}
+        />
+      ) : (
+        <Text style={styles.emptyText}>
+          {filter || sort
+            ? "Nenhum resultado encontrado para a busca."
+            : "Nenhuma item encontrado."}
+        </Text>
+      )}
+      {!!data?.length && !!pagination.totalPages && (
+        <ProgressBar current={pagination.page} total={pagination.totalPages} />
+      )}
     </View>
   );
 }
@@ -32,5 +61,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 16,
+    gap: 8,
+  },
+  emptyText: {
+    textAlign: "center",
+    fontSize: 16,
+    color: "#666",
+    marginTop: 16,
+    flex: 1,
   },
 });

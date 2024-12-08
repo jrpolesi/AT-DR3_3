@@ -6,10 +6,17 @@ export function useInfinityQuery(queryFn, options, onError) {
   const [pagination, setPagination] = useState({
     page: 1,
     totalPages: 0,
-    pageSize: 14,
+    pageSize: 5,
   });
   const [data, setData] = useState(null);
   const [state, setState] = useState({ isLoading: false, error: null });
+
+  useEffect(() => {
+    setPagination((prev) => ({
+      ...prev,
+      page: 1,
+    }));
+  }, [JSON.stringify(options)]);
 
   useEffect(() => {
     setState({ isLoading: true, error: null });
@@ -20,7 +27,8 @@ export function useInfinityQuery(queryFn, options, onError) {
       per_page: pagination.pageSize,
     })
       .then(({ body, response }) => {
-        const paginationLinks = response?.headers?.get("link").split(",") ?? [];
+        const paginationLinks =
+          response?.headers?.get("link")?.split?.(",") ?? [];
 
         const lastPage = paginationLinks?.find?.((p) =>
           p.includes('rel="last"')
