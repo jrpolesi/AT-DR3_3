@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import { useToastErrorContext } from "../contexts/ToastError";
+import { useToastErrorContext } from "../context/ToastError";
 
 export function useInfinityQuery(queryFn, options, onError) {
   const { setToastError } = useToastErrorContext();
   const [pagination, setPagination] = useState({
     page: 1,
     totalPages: 0,
-    totalResults: 0,
     pageSize: 14,
   });
   const [data, setData] = useState(null);
@@ -18,35 +17,34 @@ export function useInfinityQuery(queryFn, options, onError) {
     queryFn({
       ...options,
       page: pagination.page,
-      page_size: pagination.pageSize,
+      per_page: pagination.pageSize,
     })
-      .then(({ body }) => {
-        const {
-          collection: {
-            items,
-            metadata: { total_hits },
-          },
-        } = body;
+      .then(({ body, response }) => {
+        const paginationLinks = response?.headers?.get("link").split(",") ?? [];
+
+        const lastPage = paginationLinks?.find?.((p) =>
+          p.includes('rel="last"')
+        );
+        const totalPages = lastPage?.match(/[?&]page=(\d+)/)?.[1] ?? 1;
 
         setPagination((prev) => {
           return {
             ...prev,
-            totalPages: Math.ceil(total_hits / pagination.pageSize),
-            totalResults: total_hits,
+            totalPages: totalPages,
           };
         });
 
         setData((prevData) => {
           if (pagination.page === 1) {
-            return items;
+            return body;
           }
 
           const findIDs = {};
-          return [...prevData, ...items].filter(({ href }) => {
-            if (findIDs[href]) {
+          return [...prevData, ...body].filter(({ id }) => {
+            if (findIDs[id]) {
               return false;
             }
-            findIDs[href] = true;
+            findIDs[id] = true;
             return true;
           });
         });
@@ -75,7 +73,6 @@ export function useInfinityQuery(queryFn, options, onError) {
     setPagination((prev) => ({
       ...prev,
       page: 1,
-      pageSize: pagination.pageSize,
     }));
   }
 
@@ -84,12 +81,12 @@ export function useInfinityQuery(queryFn, options, onError) {
       page: pagination.page,
       totalPages: pagination.totalPages,
       hasNextPage: pagination.page < pagination.totalPages,
-      totalResults: pagination.totalResults,
       fetchNextPage,
       resetPagination,
     },
     data,
     isLoading: state.isLoading,
+    isRefreshing: !!data && state.isLoading,
     error: state.error,
   };
 }

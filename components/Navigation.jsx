@@ -1,7 +1,9 @@
+import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { useAuthContext } from "../context/Auth";
 import { AuthScreen } from "../screens/AuthScreen";
+import { RepositoriesScreen } from "../screens/RepositoriesScreen";
 import { UserScreen } from "../screens/UserScreen";
 
 const bottomTabNavigator = createBottomTabNavigator();
@@ -13,13 +15,28 @@ export function Navigation() {
     <NavigationContainer>
       <bottomTabNavigator.Navigator>
         {isAuthenticated ? (
-          <bottomTabNavigator.Screen
-            name="Auth"
-            component={UserScreen}
-            options={{
-              title: "Perfil",
-            }}
-          />
+          <>
+            <bottomTabNavigator.Screen
+              name="Perfil"
+              component={UserScreen}
+              options={{
+                title: "Perfil",
+                tabBarIcon: ({ color, size }) => (
+                  <Ionicons name="person" color={color} size={size} />
+                ),
+              }}
+            />
+            <bottomTabNavigator.Screen
+              name="Repos"
+              component={RepositoriesScreen}
+              options={{
+                title: "Repos",
+                tabBarIcon: ({ color, size }) => (
+                  <Ionicons name="list" color={color} size={size} />
+                ),
+              }}
+            />
+          </>
         ) : (
           <bottomTabNavigator.Screen
             name="Login"

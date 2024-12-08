@@ -55,7 +55,6 @@ export function GitHubUser({
           onPress={() => {
             Linking.openURL(perfilUrl);
           }}
-          style={styles.perfilUrlButton}
         >
           GitHub
         </SystemButton>
@@ -136,8 +135,5 @@ const styles = StyleSheet.create({
   statsText: {
     fontSize: 16,
     color: "#113d70",
-  },
-  perfilUrlButton: {
-    backgroundColor: "#0f519d",
   },
 });
