@@ -13,9 +13,22 @@ export function Navigation() {
     <NavigationContainer>
       <bottomTabNavigator.Navigator>
         {isAuthenticated ? (
-          <bottomTabNavigator.Screen name="Auth" component={UserScreen} />
+          <bottomTabNavigator.Screen
+            name="Auth"
+            component={UserScreen}
+            options={{
+              title: "Perfil",
+            }}
+          />
         ) : (
-          <bottomTabNavigator.Screen name="Login" component={AuthScreen} />
+          <bottomTabNavigator.Screen
+            name="Login"
+            component={AuthScreen}
+            options={{
+              tabBarItemStyle: { display: "none" },
+              title: "Login",
+            }}
+          />
         )}
       </bottomTabNavigator.Navigator>
     </NavigationContainer>

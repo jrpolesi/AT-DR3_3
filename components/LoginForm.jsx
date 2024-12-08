@@ -32,10 +32,11 @@ export function LoginForm({ onSubmit }) {
 const styles = StyleSheet.create({
   container: {
     padding: 16,
+    width: "100%",
   },
   input: {
     height: 40,
-    borderColor: "#ccc",
+    borderColor: "#9c9c9c",
     borderWidth: 1,
     borderRadius: 4,
     paddingHorizontal: 8,

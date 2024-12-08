@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { ActivityIndicator } from "react-native";
 import { API } from "../api/API.js";
 import { useAuthContext } from "./Auth.jsx";
 
@@ -15,6 +16,7 @@ export function useAPIContext() {
 
 export function APIProvider({ children }) {
   const { token } = useAuthContext();
+
   const [api, setApi] = useState(null);
 
   useEffect(() => {
@@ -22,6 +24,10 @@ export function APIProvider({ children }) {
       setApi(new API(token));
     }
   }, [token]);
+
+  if (!!token && !api) {
+    return <ActivityIndicator size={50} />;
+  }
 
   return <APIcontext.Provider value={api}>{children}</APIcontext.Provider>;
 }
